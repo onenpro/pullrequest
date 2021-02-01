@@ -23,7 +23,7 @@ class DemoApplicationTests {
 	@Test
 	public void testEmployee() throws Exception {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-		mockMvc.perform(get("/error")).andExpect(status().isOk())
+		mockMvc.perform(get("/")).andExpect(status().isOk())
 				.andExpect(content().string("Hola Mundo"));
 
 	}

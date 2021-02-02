@@ -30,4 +30,4 @@ var a = b + c;
 Lista de tareas:
 - [X] Tarea 1
 - [X] Tarea 2
-- [X] Tarea 3
+- [ ] Tarea 3

@@ -41,3 +41,5 @@ Las issues además de aparecer en la pestaña “Issues” también aparecen en 
 
 Toda la documentación del código se hará en las issues a no ser que sea demasiado larga, en ese caso se hará en “Wiki”. Por otra parte, en readme se documentarán las tecnologías requeridas por el proyecto con los enlaces de las mismas y el funcionamiento del CI.
 
+prueba
+

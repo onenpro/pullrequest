@@ -16,8 +16,14 @@ jobs:
 
     container: azul/zulu-openjdk:11
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
     - name: Build Spring Boot
       run: |
           chmod +x mvnw 
           ./mvnw -B package
+    - name: Subir reports de surefire
+      uses: actions/upload-artifact@v2
+      with:
+        name: surefire-report
+        path: target/surefire-reports/* 

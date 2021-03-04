@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="30">
+
+	 <Properties> 
+			<property name="path">./logs/</property>
+			<property name="projectName">O2021</property>
+			<property name="SQLlogLevel">DEBUG</property>
+			<property name="AuditlogLevel">DEBUG</property>
+			<property name="GeneralLogLevel">DEBUG</property>
+	 </Properties>
+
+    <Appenders>
+	    
+	    <Console name="ConsoleAppender" target="SYSTEM_OUT">
+		    <PatternLayout pattern="%style{%date{DEFAULT}}{yellow}
+		      %highlight{%-5level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green} 
+		      %message \n" disableAnsi="false"/>
+		</Console>
+		
+		<RollingFile name="rollingFileGeneral"
+            fileName="${path}${projectName}.log"
+            filePattern="${path}${projectName}-%i.log">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- rollover on startup, daily and when the file reaches 
+                    1 MegaBytes -->
+                <SizeBasedTriggeringPolicy size="1 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        
+        <RollingFile name="rollingFileAudit"
+            fileName="${path}${projectName}-audit.log"
+            filePattern="${path}${projectName}-audit-%i.log">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- rollover on startup, daily and when the file reaches 
+                    1 MegaBytes -->
+                <SizeBasedTriggeringPolicy size="1 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        
+        <RollingFile name="rollingFileSQL"
+            fileName="${path}${projectName}-sql.log"
+            filePattern="${path}${projectName}-sql-%i.log">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- rollover on startup, daily and when the file reaches 
+                    1 MegaBytes -->
+                <SizeBasedTriggeringPolicy size="1 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+		
+    </Appenders>
+    <Loggers>
+        
+        <Logger name="com.onenpro" level="${GeneralLogLevel}" >
+        	<AppenderRef ref="rollingFileGeneral"/>
+        </Logger>
+        
+        <Logger name="org.springframework" level="${GeneralLogLevel}" >
+        	<AppenderRef ref="rollingFileGeneral"/>
+        </Logger>
+        
+        <Logger name="audit" level="${AuditlogLevel}" >
+        	<AppenderRef ref="rollingFileAudit"/>
+        </Logger>
+        
+        <Logger name= "com.jcabi.aspects.Loggable" level= "${AuditlogLevel}">
+       		<AppenderRef ref="rollingFileAudit"/>
+        </Logger>
+        
+	    <Logger name="org.hibernate" level="${SQLlogLevel}" additivity="false">
+	      <AppenderRef ref="rollingFileSQL" />
+	    </Logger>
+	
+	    <Logger name="org.hibernate.SQL" level="${SQLlogLevel}" additivity="false">
+	      <AppenderRef ref="rollingFileSQL" />
+	    </Logger>
+	    
+	    <Logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="${SQLlogLevel}" additivity="false">
+	      <AppenderRef ref="rollingFileSQL" />
+	    </Logger>
+	    
+	    <Root level="DEBUG">
+		    <AppenderRef ref="ConsoleAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
+
+

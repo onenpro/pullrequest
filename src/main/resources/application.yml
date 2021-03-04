@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    driverClassName: ${spring.datasource.driverClassName}
+    password: ${spring.datasource.password}
+    username: ${spring.datasource.username}
+    url: ${spring.datasource.url}
+  jpa:
+    database-platform: ${spring.jpa.database-platform}
+    hibernate:
+      ddl-auto: ${spring.jpa.hibernate.ddl-auto}
+    properties:
+      hibernate:
+        default_schema: ${spring.jpa.properties.hibernate.default_schema}
+
+logging:
+  level:
+    org:
+      hibernate:
+        type: TRACE
+        SQL: TRACE
+        
+app:
+  gui:
+    paginator:
+      size: 20
+locale:
+  default: es
+messages:
+  basename: classpath:messages
+  seconds: 100
